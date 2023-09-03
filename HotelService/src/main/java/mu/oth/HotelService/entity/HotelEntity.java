@@ -16,7 +16,7 @@ import java.util.List;
 public class HotelEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "hotel_id")
     private Integer hotelId;
 
@@ -26,8 +26,11 @@ public class HotelEntity {
     @Column(name = "hotel_name", nullable = false)
     private String hotelName;
 
+    @Column(name = "hotel_photo", nullable = false)
+    private String hotelPhoto;
+
     @OneToOne
-    private ContactDetails contactDetails;
+    private Address address;
 
     @OneToMany
     private List<RoomEntity> rooms;
