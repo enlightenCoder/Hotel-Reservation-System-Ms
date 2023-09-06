@@ -54,11 +54,11 @@ public class RateEntity {
     private double teenPrice;
 
     @Column(name="START_DATE")
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @Column(name="END_DATE")
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
 

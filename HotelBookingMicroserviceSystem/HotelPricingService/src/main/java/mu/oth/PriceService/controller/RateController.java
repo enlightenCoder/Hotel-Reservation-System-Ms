@@ -12,10 +12,18 @@ import org.springframework.web.bind.annotation.*;
 public class RateController {
 
     private final RateService rateService;
+
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public String saveRate(@RequestBody  RateDto rateDto) {
         return rateService.saveRate(rateDto);
+    }
+
+    @GetMapping("/rate")
+    @ResponseStatus(HttpStatus.OK)
+    public RateDto getRate(@RequestBody  RateDto rateDto) {
+        return rateService.getRateByHotelAndRoomAndDate(rateDto);
     }
 
 }
