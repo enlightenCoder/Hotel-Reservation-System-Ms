@@ -54,16 +54,12 @@ public class HotelController {
             @RequestParam(defaultValue = "3") int size
 
     ) {
-        Map<String, Object> response;
         try {
-            response = hotelService.getHotelBySearchTermsV1(hotelName, country, page, size);
-            if (response != null) {
-                return new ResponseEntity<>(response, HttpStatus.OK);
-            }
+          return new ResponseEntity<>(hotelService.getHotelBySearchTermsV1(hotelName, country, page, size), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 
 

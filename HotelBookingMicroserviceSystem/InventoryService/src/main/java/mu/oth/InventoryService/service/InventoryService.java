@@ -1,11 +1,13 @@
 package mu.oth.InventoryService.service;
 
 import lombok.RequiredArgsConstructor;
+import mu.oth.InventoryService.dto.BookDto;
 import mu.oth.InventoryService.dto.HotelResponseDto;
 import mu.oth.InventoryService.dto.InventoryRequestDto;
 import mu.oth.InventoryService.entity.InventoryEntity;
 import mu.oth.InventoryService.repository.InventoryRepository;
 import mu.oth.InventoryService.utils.Constant;
+import mu.oth.InventoryService.utils.DateUtils;
 import mu.oth.InventoryService.utils.InventoryException;
 import mu.oth.InventoryService.utils.Status;
 import org.springframework.stereotype.Service;
@@ -88,6 +90,21 @@ public class InventoryService {
             return "Unfortunately, the available rooms for hotel " + hotelResponseDto.getHotelName() + " with room category " + inventoryRequestDto.getRoomCode() + " is " + (roomCount - availableRooms.get());
         }
     }
+
+
+
+    public boolean isInStock(BookDto bookDto) {
+         List<InventoryEntity> inventoryInStock = inventoryRepository.findByHotelNameAndRoomCategory(bookDto.getHotelName(), bookDto.getRoom().getRoomType());
+         if(inventoryInStock.size() > 0) {
+              InventoryEntity entity= inventoryInStock.stream().filter(inventoryEntity -> DateUtils.isDateRangeWithin(bookDto.getStartDate(), bookDto.getEndDate(), inventoryEntity.getStartDate(), inventoryEntity.getEndDate())).findAny().get();
+              if(entity.getBookingLimit() >= bookDto.getRoom().getRoomCount()) {
+                  return true;
+              }
+         }
+
+         return false;
+    }
+
 }
 
 

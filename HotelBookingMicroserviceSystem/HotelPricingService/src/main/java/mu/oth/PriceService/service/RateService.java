@@ -1,6 +1,7 @@
 package mu.oth.PriceService.service;
 
 import lombok.RequiredArgsConstructor;
+import mu.oth.PriceService.dto.BookingDto;
 import mu.oth.PriceService.dto.HotelResponseDto;
 import mu.oth.PriceService.dto.RateDto;
 import mu.oth.PriceService.entity.RateEntity;
@@ -75,9 +76,9 @@ public class RateService {
 
 
 
-    public RateDto getRateByHotelAndRoomAndDate(RateDto rateDto) {
-        List<RateEntity> rateEntities = rateRepository.findByHotelCodeAndRoomCode(rateDto.getHotelCode(), rateDto.getRoomCode());
-        Optional<RateEntity> findRate = rateEntities.stream().filter(rateEntity -> DateUtils.isDateRangeWithin(rateDto.getStartDate(), rateDto.getEndDate(), rateEntity.getStartDate(), rateEntity.getEndDate())).findFirst();
+    public RateDto getRateByHotelAndRoomAndDate(BookingDto bookingDto) {
+        List<RateEntity> rateEntities = rateRepository.findByHotelCodeAndRoomCode(bookingDto.getHotelCode(), bookingDto.getRoomCode());
+        Optional<RateEntity> findRate = rateEntities.stream().filter(rateEntity -> DateUtils.isDateRangeWithin(bookingDto.getStartDate(), bookingDto.getEndDate(), rateEntity.getStartDate(), rateEntity.getEndDate())).findFirst();
 
         return findRate.isPresent() ? modelMapper.map(findRate.get(), RateDto.class) : new RateDto();
     }

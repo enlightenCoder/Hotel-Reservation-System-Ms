@@ -3,12 +3,12 @@ package mu.oth.entity;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.persistence.Entity;
+import lombok.Data;
 
 @JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "type"
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
 )
 @JsonSubTypes(
         {
@@ -26,7 +26,8 @@ import jakarta.persistence.Entity;
                 ),
         }
 )
+@Data
 public class Person {
-    int numberOfPerson;
+    private int numberOfPerson;
 
 }

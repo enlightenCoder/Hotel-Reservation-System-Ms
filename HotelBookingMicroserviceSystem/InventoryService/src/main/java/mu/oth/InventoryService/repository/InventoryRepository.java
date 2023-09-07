@@ -10,4 +10,6 @@ import java.util.List;
 public interface InventoryRepository extends JpaRepository<InventoryEntity, Integer> {
 
     List<InventoryEntity> findAllByHotelCodeEqualsAndRoomCodeEqualsIgnoreCase(int hotelCode, String roomCode);
+
+    List<InventoryEntity> findByHotelNameAndRoomCategory(String hotelName, String roomCategory);
 }

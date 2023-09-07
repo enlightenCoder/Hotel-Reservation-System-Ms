@@ -30,14 +30,15 @@ public class BookingEntity {
 
     private String searchText;
 
-    private String roomType;
+    @OneToMany
+    private List<Room> room;
 
     @Column(name="START_DATE")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate startDate;
 
     @Column(name="END_DATE")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate endDate;
 
     @Column(name = "TOTAL_PRICE")

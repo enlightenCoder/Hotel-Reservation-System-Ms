@@ -1,6 +1,7 @@
 package mu.oth.PriceService.controller;
 
 import lombok.RequiredArgsConstructor;
+import mu.oth.PriceService.dto.BookingDto;
 import mu.oth.PriceService.dto.RateDto;
 import mu.oth.PriceService.service.RateService;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,14 @@ public class RateController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveRate(@RequestBody  RateDto rateDto) {
+    public String saveRate(@RequestBody RateDto rateDto) {
         return rateService.saveRate(rateDto);
     }
 
-    @GetMapping("/rate")
+    @PostMapping("/rate")
     @ResponseStatus(HttpStatus.OK)
-    public RateDto getRate(@RequestBody  RateDto rateDto) {
-        return rateService.getRateByHotelAndRoomAndDate(rateDto);
+    public RateDto getRate(@RequestBody BookingDto bookingDto) {
+        return rateService.getRateByHotelAndRoomAndDate(bookingDto);
     }
 
 }
